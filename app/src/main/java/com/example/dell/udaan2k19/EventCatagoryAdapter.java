@@ -47,6 +47,8 @@ public class EventCatagoryAdapter extends  RecyclerView.Adapter<EventCatagoryAda
 
         viewHolder.iv.setImageResource(obj.getImage());
 
+        // set onClickListener
+
         viewHolder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
