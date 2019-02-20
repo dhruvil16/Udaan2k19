@@ -21,7 +21,7 @@ import com.example.dell.udaan2k19.R;
 
 import java.util.ArrayList;
 
-public class Home extends Fragment implements Click_Event_Occour{
+public class Home extends Fragment implements EventCatagoryClicked{
 
     ArrayList list;
     RecyclerView recyclerView;
@@ -58,10 +58,8 @@ public class Home extends Fragment implements Click_Event_Occour{
         list.add(new EventCatagory(R.drawable.home));
         list.add(new EventCatagory(R.drawable.arcamera));
         list.add(new EventCatagory(R.drawable.registerd));
-        list.add(new EventCatagory(R.drawable.ic_launcher_background));
-        list.add(new EventCatagory(R.drawable.filter));
 
-        adapter=new EventCatagoryAdapter(list,getActivity());
+        adapter=new EventCatagoryAdapter(list,getActivity(),this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
 
@@ -69,12 +67,28 @@ public class Home extends Fragment implements Click_Event_Occour{
 
         recyclerView.setAdapter(adapter);
 
-}
-
+    }
 
     @Override
-    public void clickEventOccourEventCatagory(EventCatagory obj) {
+    public void respondOnClickEvent(EventCatagory obj) {
+        switch (obj.getImage()) {
+            case R.drawable.home:
+                Toast.makeText(getActivity(),"you are in technical",Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction().replace(R.id.frame,new TechnicalEvent()).commit();
+                break;
+            case R.drawable.arcamera:
+                Toast.makeText(getActivity(),"you are in non-technical",Toast.LENGTH_SHORT).show();
+               getFragmentManager().beginTransaction().replace(R.id.frame,new NonTechnicalEvent()).commit();
+                break;
+            case R.drawable.registerd:
+                Toast.makeText(getActivity(),"you are in cultural",Toast.LENGTH_SHORT).show();
+               getFragmentManager().beginTransaction().replace(R.id.frame,new CulturalEvent()).commit();
+                break;
+        }
 
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new EventList());
+
+
     }
 }
+
+
